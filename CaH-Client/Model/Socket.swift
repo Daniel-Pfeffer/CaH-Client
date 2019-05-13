@@ -14,6 +14,7 @@ class ConnectionManager: NSObject {
         self.path = path
     }
 
+    //WORKS
     func sendGet(path: String/*, body: CreateLobbyRequest?*/) {
         print("na du")
         let url: URL = URL(string: (self.path + path))!
@@ -30,15 +31,17 @@ class ConnectionManager: NSObject {
         }
     }
 
-    func sendPost(path: String, body: Any) {
+    //IN PRODUCTION
+    func sendPost(path: String, body: CreateLobbyRequest) throws {
         let url: URL = URL(string: (self.path + path))!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody: Data = try? JSONSerialization.data(withJSONObject: body) else {
-            return
-        }
-        request.httpBody = httpBody
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try encoder.encode(body)
+        print(String(data: data, encoding: .utf8))
+        request.httpBody = data
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, res: URLResponse?, error: Error?) in
             if let error = error {
                 print("Error: \(error)")
@@ -51,7 +54,4 @@ class ConnectionManager: NSObject {
         task.resume()
     }
 
-    func parse() {
-
-    }
 }

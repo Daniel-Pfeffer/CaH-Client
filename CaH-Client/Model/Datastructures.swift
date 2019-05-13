@@ -5,19 +5,61 @@
 
 import Foundation
 
-struct CreateLobbyRequest {
-    var name: String // Lobbyname
-    var userName: String // Username
-    var password: String // Password to join Lobby
+// HELPER
+struct Player {
+    var nickname: String
+    var playerId: Int
 }
 
-struct Event {
-    var eventName: String // Which thingy has updated
-    var primaryKey: Int // primary key of thingy
+// REST
+// CREATE LOBBY
+struct CreateLobbyRequest: Codable {
+    var nickname: String // Username
+    var lobbyName: String // LobbyName
+    var password: String? // Password to join Lobby
 }
 
-struct ShowLobbiesResponse {
+struct CreateLobbyResponse {
+    var playerId: Int
+    var lobbyId: Int
+}
+
+
+// SHOW LOBBY
+struct ShowLobbyResponse {
     var name: String // Lobbyname
     var count: Int // Number of players in lobby
     var hasPassword: Bool  // if lobby has password
+}
+
+struct ShowLobbyDetailsResponse {
+    var lobbyName: String
+    var master: Int
+    var players: Array<Player>
+}
+
+
+// JOIN LOBBY
+struct JoinLobbyRequest {
+    var lobbyId: Int
+    var nickName: String
+    var password: String?
+}
+
+struct JoinLobbyResponse {
+    var playerId: Int
+}
+
+
+// LEAVE LOBBY
+struct LeaveLobbyRequest {
+    var playerId: Int
+    var lobbyId: Int
+}
+
+
+// WS
+struct Event {
+    var eventName: String // Which thingy has updated
+    var primaryKey: Int? // primary key of thingy
 }

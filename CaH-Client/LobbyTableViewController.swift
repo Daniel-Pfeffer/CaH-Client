@@ -11,14 +11,19 @@ import UIKit
 
 class LobbyTableViewController: UITableViewController {
 
+
+    let socket = ConnectionManager(path: "http://192.168.1.7:8080/rest")
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Hecc")
-        let socket = ConnectionManager(path: "http://192.168.1.7:8080/rest")
-        socket.sendGet(path: "/getLobbies")
-
-        //let connection = ConnectionManager()
-        //socket.connect()
+        do {
+            try socket.sendPost(path: "/createLobby", body: CreateLobbyRequest(nickname: "MrGewurz", lobbyName: "Bunkersquad", password: "das"))
+        } catch {
+            print("Kill me pls")
+        }
+        //socket.sendGet(path: "/getLobbies")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
