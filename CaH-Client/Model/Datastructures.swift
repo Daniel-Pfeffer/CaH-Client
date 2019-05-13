@@ -21,4 +21,3 @@ struct ShowLobbiesResponse {
     var count: Int // Number of players in lobby
     var hasPassword: Bool  // if lobby has password
 }
-

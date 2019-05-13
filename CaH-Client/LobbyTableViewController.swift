@@ -13,6 +13,10 @@ class LobbyTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Hecc")
+        let socket = ConnectionManager(path: "http://192.168.1.7:8080/rest")
+        socket.sendGet(path: "/getLobbies")
+
         //let connection = ConnectionManager()
         //socket.connect()
 
