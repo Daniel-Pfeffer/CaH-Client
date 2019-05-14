@@ -12,14 +12,15 @@ import UIKit
 class LobbyTableViewController: UITableViewController {
 
 
-    let socket = ConnectionManager(path: "http://192.168.1.7:8080/rest")
+    let socket = ConnectionManager(path: "http://192.168.2.1:8080/rest")
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Hecc")
         do {
-            try socket.sendPost(path: "/createLobby", body: CreateLobbyRequest(nickname: "MrGewurz", lobbyName: "Bunkersquad", password: "das"))
+            let boi = try socket.createLobby(body: CreateLobbyRequest(nickname: "MrGewurz", lobbyName: "Bunkersquad"))
+            print(boi)
         } catch {
             print("Kill me pls")
         }
