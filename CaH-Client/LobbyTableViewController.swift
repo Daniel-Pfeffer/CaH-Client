@@ -12,15 +12,16 @@ import UIKit
 class LobbyTableViewController: UITableViewController {
 
 
-    let socket = ConnectionManager(path: "http://192.168.2.1:8080/rest")
+    let socket: ConnectionManager = ConnectionManager(path: "http://192.168.2.1:8080/rest")
+    var boi: Any? = nil;
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Hecc")
+        socket.delegate = self
         do {
-            let boi = try socket.createLobby(body: CreateLobbyRequest(nickname: "MrGewurz", lobbyName: "Bunkersquad"))
-            print(boi)
+            try socket.createLobby(body: CreateLobbyRequest(nickname: "MrGewurz", lobbyName: "Bunkersquad"))
         } catch {
             print("Kill me pls")
         }
@@ -31,6 +32,10 @@ class LobbyTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -103,4 +108,11 @@ class LobbyTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
+
+extension LobbyTableViewController: ListenOnResponse {
+    func hasReceived<T>(data: T) {
+        print(data)
+    }
+
 }

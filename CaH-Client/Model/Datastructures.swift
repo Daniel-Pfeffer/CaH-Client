@@ -101,6 +101,6 @@ struct Event: Codable {
 }
 
 // PROTOCOL
-protocol ListenOnResponse {
-
+protocol ListenOnResponse: AnyObject {
+    func hasReceived<T>(data: T) where T: Any
 }

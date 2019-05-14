@@ -7,7 +7,7 @@ import Foundation
 
 // STANDARD THINGYS
 class ConnectionManager: NSObject {
-
+    weak var delegate: ListenOnResponse?
     let path: String
 
     init(path: String) {
@@ -64,7 +64,6 @@ extension ConnectionManager {
 // HANDLES POST
 extension ConnectionManager {
     func createLobby(body: CreateLobbyRequest) throws {
-        var decoded: CreateLobbyResponse?
         let url: URL = URL(string: (self.path + "/createLobby"))!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -80,13 +79,12 @@ extension ConnectionManager {
             } else {
                 if let data = data {
                     let decoder = JSONDecoder()
-                    decoded = try! decoder.decode(CreateLobbyResponse.self, from: data)
-                    print(decoded)
+                    let decoded = try! decoder.decode(CreateLobbyResponse.self, from: data)
+                    self.delegate!.hasReceived(data: decoded)
                 }
             }
         }
         task.resume()
-        //return decoded!
     }
 
     func leaveLobby(body: LeaveLobbyRequest) throws {
@@ -103,7 +101,6 @@ extension ConnectionManager {
             if let error = error {
                 print("Error: \(error)")
             } else {
-                // WORKS DUNNO WHAT TO DO
             }
         }
         task.resume()
@@ -126,9 +123,7 @@ extension ConnectionManager {
                 if let data = data {
                     let decoder = JSONDecoder()
                     let decoded = try! decoder.decode(JoinLobbyResponse.self, from: data)
-                    DispatchQueue.main.async {
-                        return decoded
-                    }
+                    self.delegate!.hasReceived(data: decoded)
                 }
             }
         }
