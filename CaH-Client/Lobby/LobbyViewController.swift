@@ -1,28 +1,40 @@
 //
-//  CreateLobbyViewController.swift
+//  LobbyViewController.swift
 //  CaH-Client
 //
-//  Created by Alexander Burghuber on 07.05.19.
+//  Created by Alexander Burghuber on 14.05.19.
 //  Copyright © 2019 at.htl-leonding. All rights reserved.
 //
 
 import UIKit
 
-class CreateLobbyViewController: UIViewController {
+/*
+class DataSource: NSObject, UITableViewDataSource {
+    
+    let model = Model()
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // TODO
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // TODO
+        return nil
+    }
+}
+*/
+class LobbyViewController: UIViewController {
 
-    @IBOutlet weak var nickname: UITextField!
-    @IBOutlet weak var lobbyName: UITextField!
-    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func onCreate(_ sender: Any) {
-        print("onCreate nickname: \(nickname.text!) lobbyName: \(lobbyName.text!) password: \(password.text!)")
-    }
-    
+
     /*
     // MARK: - Navigation
 

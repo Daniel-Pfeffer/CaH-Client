@@ -1,14 +1,16 @@
 //
-//  LobbyTableViewCell.swift
+//  PlayerTableViewCell.swift
 //  CaH-Client
 //
-//  Created by Alexander Burghuber on 07.05.19.
+//  Created by Alexander Burghuber on 13.05.19.
 //  Copyright © 2019 at.htl-leonding. All rights reserved.
 //
 
 import UIKit
 
-class LobbyTableViewCell: UITableViewCell {
+class PlayerTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var playerName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
