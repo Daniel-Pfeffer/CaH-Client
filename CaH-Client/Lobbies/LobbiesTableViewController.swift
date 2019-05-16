@@ -8,9 +8,9 @@
 
 import UIKit
 
+class LobbiesTableViewController: UITableViewController {
 
-class LobbyTableViewController: UITableViewController {
-
+    var model = Model()
 
     let socket: ConnectionManager = ConnectionManager(path: "http://192.168.2.1:8080/rest")
     var boi: Any? = nil;
@@ -18,52 +18,38 @@ class LobbyTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Hecc")
+
+        let lobby = LobbyBO(lobbyId: 0, lobbyName: "Karls lobby", hasPwd: true, playerCount: 1)
+        model.lobbies.append(lobby)
+
         socket.delegate = self
         do {
             try socket.createLobby(body: CreateLobbyRequest(nickname: "MrGewurz", lobbyName: "Bunkersquad"))
         } catch {
-            print("Kill me pls")
+            print("Failed")
         }
-        //socket.sendGet(path: "/getLobbies")
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
+        }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return model.lobbies.count
     }
 
-    @IBAction func onAddLobby(_ sender: Any) {
-        print("Clicked AddLobby")
-        // performSegue(withIdentifier: "createLobby", sender: self)
-
-    }
-
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "lobby", for: indexPath) as! LobbyTableViewCell
+        let lobby = model.lobbies[indexPath.row]
+        cell.lobby = lobby
+        cell.lobbyName?.text = lobby.lobbyName
+        cell.playerCount?.text = "\(lobby.playerCount)/10 Players"
         return cell
     }
-    */
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -98,19 +84,37 @@ class LobbyTableViewController: UITableViewController {
         return true
     }
     */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier != "createLobby" {
+            let selectedLobby = sender as! LobbyTableViewCell
+            let alert = UIAlertController(title: selectedLobby.lobbyName.text, message: nil, preferredStyle: .alert)
+
+            alert.addTextField { (textField: UITextField) in
+                textField.placeholder = "Nickname"
+            }
+
+            var message: String
+            if selectedLobby.lobby.hasPwd {
+                alert.addTextField { (textField: UITextField) in
+                    textField.placeholder = "Password"
+                }
+                message = "Enter your nickname and the password"
+            } else {
+                message = "Enter your nickname"
+            }
+            alert.message = message
+
+            alert.addAction(UIAlertAction(title: "Join", style: .default, handler: { action in
+                segue.perform()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+        }
     }
-    */
 }
 
-extension LobbyTableViewController: ListenOnResponse {
+extension LobbiesTableViewController: ListenOnResponse {
     func hasReceived<T>(data: T) {
         print(data)
     }
