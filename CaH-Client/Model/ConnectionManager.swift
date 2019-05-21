@@ -31,13 +31,23 @@ extension ConnectionManager {
             } else {
                 if let data = data {
                     let decoder = JSONDecoder()
-                    let decoded = try? decoder.decode(ShowLobbyDetailsResponse.self, from: data)
-                    print("Decoded: \(decoded)")
-                    // TODO: send to model
+                    let decoded = try? decoder.decode(GetLobbyResponse.self, from: data)
+                    self.delegate!.hasReceived(res: decoded, req: "")
                 }
             }
         }
         task.resume();
+    }
+
+    func example() {
+        let url: URL = URL(string: (self.path + "/example"))!
+
+        var req: URLRequest = URLRequest(url: url)
+        req.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: req) { (data: Data?, res: URLResponse?, error: Error?) in
+            self.delegate?.hasReceived(res: "Example called", req: "HI")
+        }
+        task.resume()
     }
 
     func showLobbies() {
@@ -51,9 +61,42 @@ extension ConnectionManager {
             } else {
                 if let data = data {
                     let decoder = JSONDecoder()
-                    let decoded = try? decoder.decode(ShowLobbyResponse.self, from: data)
-                    print("Decoded: \(decoded)")
-                    // TODO: sent to model
+                    let decoded = try? decoder.decode(Array<GetLobbiesResponse>.self, from: data)
+                    self.delegate!.hasReceived(res: decoded, req: "")
+                }
+            }
+        }
+        task.resume()
+    }
+
+    func startGame(lobbyId: Int) {
+        let url: URL = URL(string: (self.path + "/startGame/" + String(lobbyId)))!
+        var req: URLRequest = URLRequest(url: url)
+        req.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: req) { (data: Data?, res: URLResponse?, error: Error?) in
+            if let error = error {
+                print("Error: \(error)")
+            } else {
+                if data != nil {
+                    self.delegate!.hasReceived(res: true, req: "")
+                }
+            }
+        }
+        task.resume()
+    }
+
+    func getRandomCards() {
+        let url: URL = URL(string: (self.path + "/getRandomCards"))!
+        var req: URLRequest = URLRequest(url: url)
+        req.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: req) { (data: Data?, res: URLResponse?, error: Error?) in
+            if let error = error {
+                print("Error: \(error)")
+            } else {
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    let decoded = try? decoder.decode(Array<String>.self, from: data)
+                    self.delegate?.hasReceived(res: decoded, req: "")
                 }
             }
         }
@@ -80,7 +123,7 @@ extension ConnectionManager {
                 if let data = data {
                     let decoder = JSONDecoder()
                     let decoded = try! decoder.decode(CreateLobbyResponse.self, from: data)
-                    self.delegate!.hasReceived(data: decoded)
+                    self.delegate!.hasReceived(res: decoded, req: body)
                 }
             }
         }
@@ -114,7 +157,7 @@ extension ConnectionManager {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data: Data = try encoder.encode(body)
-        print(String(data: data, encoding: .utf8))
+        print("Join LOBBY: \(String(data: data, encoding: .utf8))")
         request.httpBody = data
         let task = URLSession.shared.dataTask(with: request) { (data: Data?, res: URLResponse?, error: Error?) in
             if let error = error {
@@ -123,7 +166,7 @@ extension ConnectionManager {
                 if let data = data {
                     let decoder = JSONDecoder()
                     let decoded = try! decoder.decode(JoinLobbyResponse.self, from: data)
-                    self.delegate!.hasReceived(data: decoded)
+                    self.delegate!.hasReceived(res: decoded, req: body)
                 }
             }
         }

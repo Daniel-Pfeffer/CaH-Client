@@ -13,24 +13,34 @@ class CreateLobbyViewController: UIViewController {
     @IBOutlet weak var nickname: UITextField!
     @IBOutlet weak var lobbyName: UITextField!
     @IBOutlet weak var password: UITextField!
-    
+    var connectionManager: ConnectionManager? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        connectionManager?.delegate = self
         // Do any additional setup after loading the view.
     }
-    
+
     @IBAction func onCreate(_ sender: Any) {
-        print("onCreate nickname: \(nickname.text!) lobbyName: \(lobbyName.text!) password: \(password.text!)")
+        try? connectionManager?.createLobby(
+                body: CreateLobbyRequest(
+                        nickname: nickname.text!,
+                        lobbyName: lobbyName.text!,
+                        password: password.text?.count == 0 ? nil : password.text
+                )
+        )
     }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        /*if segue.identifier == "joinLobby" {
+            let dest = segue.destination as! LobbyViewController
+            dest.connectionManager = self.connectionManager
+        }*/
+    }*/
+}
+
+extension CreateLobbyViewController: ListenOnResponse {
+    func hasReceived<T, S>(res: T, req: S) {
+        performSegue(withIdentifier: <#T##String##Swift.String#>, sender: <#T##Any?##Any?#>)
     }
-    */
-
 }

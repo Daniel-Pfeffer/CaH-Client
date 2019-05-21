@@ -8,31 +8,8 @@
 
 import Foundation
 
-class LobbyBO {
-    var lobbyId: Int
-    var lobbyName: String
-    var hasPwd: Bool
-    var playerCount: Int
-    var players = [PlayerBO]()
-    
-    init(lobbyId: Int, lobbyName: String, hasPwd: Bool, playerCount: Int) {
-        self.lobbyId = lobbyId
-        self.lobbyName = lobbyName
-        self.hasPwd = hasPwd
-        self.playerCount = playerCount
-    }
-}
-
-class PlayerBO {
-    var playerId: Int
-    var nickname: String
-    
-    init(playerId: Int, nickname: String) {
-        self.playerId = playerId
-        self.nickname = nickname
-    }
-}
-
-class Model {
+class DataDistributor {
     var lobbies = [LobbyBO]()
+    var players = [PlayerBO]()
+    var cards = [Card]()
 }

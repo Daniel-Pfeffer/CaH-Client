@@ -1,5 +1,5 @@
 //
-//  LobbyTableViewController.swift
+//  LobbyViewController.swift
 //  CaH-Client
 //
 //  Created by Alexander Burghuber on 07.05.19.
@@ -10,28 +10,24 @@ import UIKit
 
 class LobbiesTableViewController: UITableViewController {
 
-    var model = Model()
+    var model = DataDistributor()
 
     let socket: ConnectionManager = ConnectionManager(path: "http://192.168.2.1:8080/rest")
-    var boi: Any? = nil;
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let lobby = LobbyBO(lobbyId: 0, lobbyName: "Karls lobby", hasPwd: true, playerCount: 1)
-        model.lobbies.append(lobby)
-
-        socket.delegate = self
-        do {
-            try socket.createLobby(body: CreateLobbyRequest(nickname: "MrGewurz", lobbyName: "Bunkersquad"))
-        } catch {
-            print("Failed")
-        }
-        }
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Clear lobbies
+        model.lobbies.removeAll()
+        // set listener to current controller
+        socket.delegate = self
+        // show lobbies
+        socket.showLobbies()
+        // TODO: Fix bug that you have to click to reload tableView
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,50 +39,19 @@ class LobbiesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "lobby", for: indexPath) as! LobbyTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "lobby", for: indexPath) as! LobbiesTableViewCell
         let lobby = model.lobbies[indexPath.row]
         cell.lobby = lobby
         cell.lobbyName?.text = lobby.lobbyName
         cell.playerCount?.text = "\(lobby.playerCount)/10 Players"
         return cell
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != "createLobby" {
-            let selectedLobby = sender as! LobbyTableViewCell
+            let dest = segue.destination as! LobbyViewController
+            dest.connectionManager = self.socket
+            let selectedLobby = sender as! LobbiesTableViewCell
             let alert = UIAlertController(title: selectedLobby.lobbyName.text, message: nil, preferredStyle: .alert)
 
             alert.addTextField { (textField: UITextField) in
@@ -105,18 +70,50 @@ class LobbiesTableViewController: UITableViewController {
             alert.message = message
 
             alert.addAction(UIAlertAction(title: "Join", style: .default, handler: { action in
+                var join: JoinLobbyRequest = JoinLobbyRequest()
+                if let textFields = alert.textFields {
+                    if let username = textFields[0].text {
+                        if textFields.count > 1 {
+                            if let pwd = textFields[1].text {
+                                join.password = pwd
+                            }
+                        }
+                        join.nickname = username
+                        join.lobbyId = selectedLobby.lobby.lobbyId
+                        dest.player?.nickname = username
+                    }
+                }
+                dest.joinReq = join
                 segue.perform()
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
             self.present(alert, animated: true)
+        } else {
+            let dest = segue.destination as! CreateLobbyViewController
+            dest.connectionManager = self.socket
         }
     }
 }
 
 extension LobbiesTableViewController: ListenOnResponse {
-    func hasReceived<T>(data: T) {
-        print(data)
+    func hasReceived<T, TT>(res: T, req: TT) {
+        if type(of: res) == Optional<Array<GetLobbiesResponse>>.self {
+            if let dat = res as? Array<GetLobbiesResponse> {
+                dat.forEach { response in
+                    print("\(response.lobbyName)")
+                    self.model.lobbies.append(
+                            LobbyBO(
+                                    lobbyId: response.lobbyId,
+                                    lobbyName: response.lobbyName,
+                                    hasPwd: response.hasPwd,
+                                    playerCount: response.playerCount
+                            )
+                    )
+                };
+                print("Reload now")
+                self.tableView.reloadData()
+            }
+        }
     }
-
 }

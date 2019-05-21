@@ -5,7 +5,7 @@
 
 import Foundation
 
-// HELPER
+// Objects
 struct Player: Codable {
     var nickname: String
     var playerId: Int?
@@ -17,6 +17,43 @@ struct Player: Codable {
     init(nickname: String, playerId: Int) {
         self.nickname = nickname
         self.playerId = playerId
+    }
+
+    init() {
+        self.nickname = ""
+    }
+}
+
+class LobbyBO: Codable {
+    var lobbyId: Int
+    var lobbyName: String
+    var hasPwd: Bool
+    var playerCount: Int
+    var players = [PlayerBO]()
+
+    init(lobbyId: Int, lobbyName: String, hasPwd: Bool, playerCount: Int) {
+        self.lobbyId = lobbyId
+        self.lobbyName = lobbyName
+        self.hasPwd = hasPwd
+        self.playerCount = playerCount
+    }
+}
+
+class PlayerBO: Codable {
+    var playerId: Int
+    var nickname: String
+
+    init(playerId: Int, nickname: String) {
+        self.playerId = playerId
+        self.nickname = nickname
+    }
+}
+
+class Card: Codable {
+    var desc: String
+
+    init(desc: String) {
+        self.desc = desc
     }
 }
 
@@ -46,34 +83,41 @@ struct CreateLobbyResponse: Codable {
 
 
 // SHOW LOBBY !only Responses!
-struct ShowLobbyResponse: Codable {
-    var name: String // Lobbyname
-    var count: Int // Number of players in lobby
-    var hasPassword: Bool  // if lobby has password
+struct GetLobbiesResponse: Codable {
+    var lobbyName: String // Lobbyname
+    var playerCount: Int // Number of players in lobby
+    var hasPwd: Bool  // if lobby has password
+    var lobbyId: Int
+
 }
 
-struct ShowLobbyDetailsResponse: Codable {
+struct GetLobbyResponse: Codable {
     var lobbyName: String
     var master: Int
-    var players: Array<Player>
+    var players: Array<PlayerBO>
 }
 
 
 // JOIN LOBBY
 struct JoinLobbyRequest: Codable {
     var lobbyId: Int
-    var nickName: String
+    var nickname: String
     var password: String?
 
     init(lobbyId: Int, nickName: String, password: String?) {
         self.lobbyId = lobbyId
-        self.nickName = nickName
+        self.nickname = nickName
         self.password = password
+    }
+
+    init() {
+        self.lobbyId = 0
+        self.nickname = ""
     }
 
     init(lobbyId: Int, nickName: String) {
         self.lobbyId = lobbyId
-        self.nickName = nickName
+        self.nickname = nickName
     }
 }
 
@@ -102,5 +146,5 @@ struct Event: Codable {
 
 // PROTOCOL
 protocol ListenOnResponse: AnyObject {
-    func hasReceived<T>(data: T) where T: Any
+    func hasReceived<T, S>(res: T, req: S) where T: Any, S: Any
 }

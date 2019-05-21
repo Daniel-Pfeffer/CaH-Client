@@ -8,12 +8,12 @@
 
 import UIKit
 
-class LobbyTableViewCell: UITableViewCell {
-    
+class LobbiesTableViewCell: UITableViewCell {
+
     var lobby: LobbyBO!
     @IBOutlet weak var lobbyName: UILabel!
     @IBOutlet weak var playerCount: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,8 +21,5 @@ class LobbyTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
 }
