@@ -35,6 +35,7 @@ class LobbiesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("get numOfRows ")
         return model.lobbies.count
     }
 
@@ -112,7 +113,9 @@ extension LobbiesTableViewController: ListenOnResponse {
                     )
                 };
                 print("Reload now")
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }

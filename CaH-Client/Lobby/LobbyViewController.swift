@@ -40,7 +40,7 @@ class LobbyViewController: UIViewController {
 
         let message = "Are you sure you want to start the game?"
         alert.message = message
-        alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             realDest.connectionManager = self.connectionManager
             realDest.lobbyId = self.joinReq?.lobbyId
             realDest.model = self.model
@@ -80,7 +80,9 @@ extension LobbyViewController: ListenOnResponse {
                 self.model.players.forEach({ player in
                     print("Player: \(player.nickname)")
                 })
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }

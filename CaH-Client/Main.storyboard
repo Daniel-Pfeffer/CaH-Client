@@ -278,6 +278,7 @@
                         <outlet property="lobbyName" destination="gTr-IT-9x7" id="xoD-qs-fMJ"/>
                         <outlet property="nickname" destination="AXg-FT-yta" id="b48-q3-WnQ"/>
                         <outlet property="password" destination="Mwg-FU-Yr8" id="Vhc-A3-GH9"/>
+                        <segue destination="mUg-ig-Jl9" kind="show" identifier="joinFromCreate" id="U27-tY-V17"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ihu-gd-6wP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -304,4 +305,7 @@
     <resources>
         <image name="message" width="16" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="U27-tY-V17"/>
+    </inferredMetricsTieBreakers>
 </document>

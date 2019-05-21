@@ -31,16 +31,17 @@ class CreateLobbyViewController: UIViewController {
         )
     }
 
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*if segue.identifier == "joinLobby" {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "joinFromCreate" {
             let dest = segue.destination as! LobbyViewController
             dest.connectionManager = self.connectionManager
-        }*/
-    }*/
+        }
+    }
+
 }
 
 extension CreateLobbyViewController: ListenOnResponse {
     func hasReceived<T, S>(res: T, req: S) {
-        performSegue(withIdentifier: <#T##String##Swift.String#>, sender: <#T##Any?##Any?#>)
+        performSegue(withIdentifier: "joinFromCreate", sender: nil)
     }
 }
