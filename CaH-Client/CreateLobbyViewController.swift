@@ -48,7 +48,7 @@ class CreateLobbyViewController: UIViewController {
             let dest = segue.destination as! LobbyViewController
             dest.connectionManager = self.connectionManager
             dest.player = self.player
-            dest.lobbyId = self.lobbyId
+            dest.lobby = Lobby(lobbyId: self.lobbyId, lobbyName: self.lobbyName.text!)
         }
     }
 }

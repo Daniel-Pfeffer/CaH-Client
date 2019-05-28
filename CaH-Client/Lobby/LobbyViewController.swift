@@ -26,9 +26,19 @@ class LobbyViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         connectionManager?.delegate = self
-        self.navBar.hidesBackButton = true
+        self.navBar.backBarButtonItem?.title = "Leave Lobby"
         self.navBar.title = self.lobby.lobbyName
-
+        var toDelete = 0
+        var iterator = 0
+        self.navigationController?.viewControllers.forEach({ const in
+            if (type(of: const) == CreateLobbyViewController.self) {
+                toDelete = iterator
+            }
+            iterator += 1
+        })
+        if (toDelete != 0) {
+            self.navigationController?.viewControllers.remove(at: toDelete)
+        }
         self.connectionManager?.showLobby(id: self.lobby.lobbyId)
     }
 
