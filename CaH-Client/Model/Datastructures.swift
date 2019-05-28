@@ -29,7 +29,7 @@ class LobbyBO: Codable {
     var lobbyName: String
     var hasPwd: Bool
     var playerCount: Int
-    var players = [PlayerBO]()
+    var players = [Player]()
 
     init(lobbyId: Int, lobbyName: String, hasPwd: Bool, playerCount: Int) {
         self.lobbyId = lobbyId
@@ -39,13 +39,18 @@ class LobbyBO: Codable {
     }
 }
 
-class PlayerBO: Codable {
-    var playerId: Int
-    var nickname: String
+class Lobby: Codable {
+    var lobbyId: Int
+    var lobbyName: String
 
-    init(playerId: Int, nickname: String) {
-        self.playerId = playerId
-        self.nickname = nickname
+    init() {
+        self.lobbyName = ""
+        self.lobbyId = 0
+    }
+
+    init(lobbyId: Int, lobbyName: String) {
+        self.lobbyId = lobbyId
+        self.lobbyName = lobbyName
     }
 }
 
@@ -94,7 +99,7 @@ struct GetLobbiesResponse: Codable {
 struct GetLobbyResponse: Codable {
     var lobbyName: String
     var master: Int
-    var players: Array<PlayerBO>
+    var players: Array<Player>
 }
 
 
@@ -123,6 +128,7 @@ struct JoinLobbyRequest: Codable {
 
 struct JoinLobbyResponse: Codable {
     var playerId: Int
+    var lobbyName: String
 }
 
 

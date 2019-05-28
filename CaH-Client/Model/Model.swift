@@ -10,6 +10,6 @@ import Foundation
 
 class DataDistributor {
     var lobbies = [LobbyBO]()
-    var players = [PlayerBO]()
+    var players = [Player]()
     var cards = [Card]()
 }

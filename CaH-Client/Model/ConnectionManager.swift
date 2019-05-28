@@ -4,23 +4,31 @@
 //
 
 import Foundation
+import Starscream
 
 // STANDARD THINGYS
 class ConnectionManager: NSObject {
     weak var delegate: ListenOnResponse?
     let path: String
+    var socket: WebSocket? = nil
 
     init(path: String) {
         self.path = path
+        self.socket = WebSocket(url: URL(string: path + "ws")!)
     }
 
+    func connectSocket() {
+        self.socket?.delegate = self
+        self.socket?.callbackQueue = DispatchQueue(label: "SocketCallback")
+        self.socket?.connect()
+    }
 }
 
 // HANDLES REST
 extension ConnectionManager {
 
     func showLobby(id: Int) {
-        let url: URL = URL(string: (self.path + "/getLobby/" + String(id)))!
+        let url: URL = URL(string: (self.path + "rest/getLobby/" + String(id)))!
 
         var req: URLRequest = URLRequest(url: url)
         req.httpMethod = "GET"
@@ -40,7 +48,7 @@ extension ConnectionManager {
     }
 
     func example() {
-        let url: URL = URL(string: (self.path + "/example"))!
+        let url: URL = URL(string: (self.path + "rest/example"))!
 
         var req: URLRequest = URLRequest(url: url)
         req.httpMethod = "GET"
@@ -51,7 +59,7 @@ extension ConnectionManager {
     }
 
     func showLobbies() {
-        let url: URL = URL(string: (self.path + "/getLobbies"))!
+        let url: URL = URL(string: (self.path + "rest/getLobbies"))!
 
         var req: URLRequest = URLRequest(url: url)
         req.httpMethod = "GET"
@@ -70,7 +78,7 @@ extension ConnectionManager {
     }
 
     func startGame(lobbyId: Int) {
-        let url: URL = URL(string: (self.path + "/startGame/" + String(lobbyId)))!
+        let url: URL = URL(string: (self.path + "rest/startGame/" + String(lobbyId)))!
         var req: URLRequest = URLRequest(url: url)
         req.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: req) { (data: Data?, res: URLResponse?, error: Error?) in
@@ -86,7 +94,7 @@ extension ConnectionManager {
     }
 
     func getRandomCards() {
-        let url: URL = URL(string: (self.path + "/getRandomCards"))!
+        let url: URL = URL(string: (self.path + "rest/getRandomCards"))!
         var req: URLRequest = URLRequest(url: url)
         req.httpMethod = "GET"
         let task = URLSession.shared.dataTask(with: req) { (data: Data?, res: URLResponse?, error: Error?) in
@@ -107,7 +115,7 @@ extension ConnectionManager {
 // HANDLES POST
 extension ConnectionManager {
     func createLobby(body: CreateLobbyRequest) throws {
-        let url: URL = URL(string: (self.path + "/createLobby"))!
+        let url: URL = URL(string: (self.path + "rest/createLobby"))!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
@@ -131,7 +139,7 @@ extension ConnectionManager {
     }
 
     func leaveLobby(body: LeaveLobbyRequest) throws {
-        let url: URL = URL(string: (self.path + "/leaveLobby"))!
+        let url: URL = URL(string: (self.path + "rest/leaveLobby"))!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
@@ -150,7 +158,7 @@ extension ConnectionManager {
     }
 
     func joinLobby(body: JoinLobbyRequest) throws {
-        let url: URL = URL(string: (self.path + "/joinLobby"))!
+        let url: URL = URL(string: (self.path + "rest/joinLobby"))!
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
@@ -159,17 +167,40 @@ extension ConnectionManager {
         let data: Data = try encoder.encode(body)
         print("Join LOBBY: \(String(data: data, encoding: .utf8))")
         request.httpBody = data
-        let task = URLSession.shared.dataTask(with: request) { (data: Data?, res: URLResponse?, error: Error?) in
+        let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { (data: Data?, res: URLResponse?, error: Error?) in
             if let error = error {
                 print("Error: \(error)")
             } else {
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    let decoded = try! decoder.decode(JoinLobbyResponse.self, from: data)
-                    self.delegate!.hasReceived(res: decoded, req: body)
+                if let resp: HTTPURLResponse = res as? HTTPURLResponse {
+                    if resp.statusCode != 401 {
+                        if let data = data {
+                            let decoder = JSONDecoder()
+                            let decoded = try! decoder.decode(JoinLobbyResponse.self, from: data)
+                            self.delegate!.hasReceived(res: decoded, req: body)
+                        }
+                    }
                 }
+
             }
         }
         task.resume()
+    }
+}
+
+// HANDLES WS
+extension ConnectionManager: WebSocketDelegate {
+    public func websocketDidConnect(socket: WebSocketClient) {
+        print("Hello El Sôrvõr")
+    }
+
+    public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+        print("Bye eš Śõrvêr")
+    }
+
+    public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+        print("Rèçīèvėd \(text)")
+    }
+
+    public func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
     }
 }

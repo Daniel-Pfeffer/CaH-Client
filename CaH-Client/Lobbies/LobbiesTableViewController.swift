@@ -12,22 +12,29 @@ class LobbiesTableViewController: UITableViewController {
 
     var model = DataDistributor()
 
-    let socket: ConnectionManager = ConnectionManager(path: "http://192.168.2.1:8080/rest")
+    let socket: ConnectionManager = ConnectionManager(path: "http://192.168.2.1:8080/")
 
+    var player: Player = Player()
+
+    var lobby: Lobby = Lobby()
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
+
         super.viewWillAppear(animated)
         // Clear lobbies
         model.lobbies.removeAll()
         // set listener to current controller
         socket.delegate = self
+        // if socket is not connected connect
+        if (!socket.socket!.isConnected) {
+            //  socket.connectSocket()
+        }
         // show lobbies
         socket.showLobbies()
-        // TODO: Fix bug that you have to click to reload tableView
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,48 +55,55 @@ class LobbiesTableViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow
+        let selectedLobby = tableView.cellForRow(at: indexPath!) as! LobbiesTableViewCell
+
+        let alert = UIAlertController(title: selectedLobby.lobbyName.text, message: nil, preferredStyle: .alert)
+
+        alert.addTextField { (textField: UITextField) in
+            textField.placeholder = "Nickname"
+        }
+
+        var message: String
+        if selectedLobby.lobby.hasPwd {
+            alert.addTextField { (textField: UITextField) in
+                textField.placeholder = "Password"
+            }
+            message = "Enter your nickname and the password"
+        } else {
+            message = "Enter your nickname"
+        }
+        alert.message = message
+
+        alert.addAction(UIAlertAction(title: "Join", style: .default, handler: { action in
+            var join: JoinLobbyRequest = JoinLobbyRequest()
+            if let textFields = alert.textFields {
+                if let username = textFields[0].text {
+                    if textFields.count > 1 {
+                        if let pwd = textFields[1].text {
+                            join.password = pwd
+                        }
+                    }
+                    join.nickname = username
+                    join.lobbyId = selectedLobby.lobby.lobbyId
+                }
+            }
+            self.player.nickname = join.nickname
+            self.lobby.lobbyId = join.lobbyId
+            try? self.socket.joinLobby(body: join)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != "createLobby" {
             let dest = segue.destination as! LobbyViewController
             dest.connectionManager = self.socket
-            let selectedLobby = sender as! LobbiesTableViewCell
-            let alert = UIAlertController(title: selectedLobby.lobbyName.text, message: nil, preferredStyle: .alert)
-
-            alert.addTextField { (textField: UITextField) in
-                textField.placeholder = "Nickname"
-            }
-
-            var message: String
-            if selectedLobby.lobby.hasPwd {
-                alert.addTextField { (textField: UITextField) in
-                    textField.placeholder = "Password"
-                }
-                message = "Enter your nickname and the password"
-            } else {
-                message = "Enter your nickname"
-            }
-            alert.message = message
-
-            alert.addAction(UIAlertAction(title: "Join", style: .default, handler: { action in
-                var join: JoinLobbyRequest = JoinLobbyRequest()
-                if let textFields = alert.textFields {
-                    if let username = textFields[0].text {
-                        if textFields.count > 1 {
-                            if let pwd = textFields[1].text {
-                                join.password = pwd
-                            }
-                        }
-                        join.nickname = username
-                        join.lobbyId = selectedLobby.lobby.lobbyId
-                        dest.player?.nickname = username
-                    }
-                }
-                dest.joinReq = join
-                segue.perform()
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-            self.present(alert, animated: true)
+            dest.lobby = self.lobby
+            dest.player = self.player
         } else {
             let dest = segue.destination as! CreateLobbyViewController
             dest.connectionManager = self.socket
@@ -115,6 +129,14 @@ extension LobbiesTableViewController: ListenOnResponse {
                 print("Reload now")
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                }
+            }
+        } else if type(of: res) == JoinLobbyResponse.self {
+            if let dat = res as? JoinLobbyResponse {
+                self.player.playerId = dat.playerId
+                self.lobby.lobbyName = dat.lobbyName
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "joinLobby", sender: nil)
                 }
             }
         }

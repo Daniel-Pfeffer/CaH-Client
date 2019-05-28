@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Lobbies-->
+        <!--Aviable Lobbies-->
         <scene sceneID="xim-Xg-xsu">
             <objects>
                 <tableViewController id="sgE-3w-1rd" customClass="LobbiesTableViewController" customModule="CaH_Client" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,7 +56,6 @@
                                 <connections>
                                     <outlet property="lobbyName" destination="Wu1-2u-5aD" id="Tpd-58-mtZ"/>
                                     <outlet property="playerCount" destination="CdO-Gc-xJ9" id="ebk-Rn-Jxs"/>
-                                    <segue destination="mUg-ig-Jl9" kind="show" id="2Rq-BN-a5P"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -65,7 +64,7 @@
                             <outlet property="delegate" destination="sgE-3w-1rd" id="yJe-sP-VoT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Lobbies" id="rMX-TH-LyH">
+                    <navigationItem key="navigationItem" title="Aviable Lobbies" id="rMX-TH-LyH">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1A1-7V-X8V">
                             <connections>
                                 <action selector="onAddLobby:" destination="sgE-3w-1rd" id="orm-FV-bOU"/>
@@ -73,12 +72,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="mUg-ig-Jl9" kind="show" identifier="joinLobby" id="dxB-M4-UhQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sCj-e3-NAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="527.536231884058" y="-120.53571428571428"/>
         </scene>
-        <!--Lobby-->
+        <!--Lobby View Controller-->
         <scene sceneID="TLi-Kg-VnU">
             <objects>
                 <viewController id="mUg-ig-Jl9" customClass="LobbyViewController" customModule="CaH_Client" customModuleProvider="target" sceneMemberID="viewController">
@@ -124,7 +126,7 @@
                                 </constraints>
                                 <state key="normal" title="Start"/>
                                 <connections>
-                                    <segue destination="0nf-FR-oSa" kind="show" id="QAF-8h-IyG"/>
+                                    <action selector="onStart:" destination="mUg-ig-Jl9" eventType="touchUpInside" id="u6C-4m-4RS"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -140,9 +142,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wiv-qv-U3J"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Lobby" largeTitleDisplayMode="always" id="tR8-Xu-eHK"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="tR8-Xu-eHK"/>
                     <connections>
+                        <outlet property="navBar" destination="tR8-Xu-eHK" id="iBF-SF-gsb"/>
                         <outlet property="tableView" destination="vBq-xu-okO" id="Hgv-Jj-8Jw"/>
+                        <segue destination="0nf-FR-oSa" kind="show" identifier="startGame" id="t13-II-7u0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YwN-7q-AeO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -215,7 +219,7 @@
             </objects>
             <point key="canvasLocation" x="2257" y="-124"/>
         </scene>
-        <!--Create Lobby-->
+        <!--Create New Lobby-->
         <scene sceneID="ASg-I0-cxn">
             <objects>
                 <viewController storyboardIdentifier="createLobby" id="GkH-D7-6dI" customClass="CreateLobbyViewController" customModule="CaH_Client" customModuleProvider="target" sceneMemberID="viewController">
@@ -273,7 +277,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Nw-dr-3JV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create Lobby" largeTitleDisplayMode="always" id="b2G-7i-QGI"/>
+                    <navigationItem key="navigationItem" title="Create New Lobby" id="MOm-rg-3Vz"/>
                     <connections>
                         <outlet property="lobbyName" destination="gTr-IT-9x7" id="xoD-qs-fMJ"/>
                         <outlet property="nickname" destination="AXg-FT-yta" id="b48-q3-WnQ"/>

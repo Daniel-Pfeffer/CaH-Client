@@ -14,6 +14,8 @@ class CreateLobbyViewController: UIViewController {
     @IBOutlet weak var lobbyName: UITextField!
     @IBOutlet weak var password: UITextField!
     var connectionManager: ConnectionManager? = nil
+    var lobbyId: Int = 0
+    var player: Player = Player()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +24,22 @@ class CreateLobbyViewController: UIViewController {
     }
 
     @IBAction func onCreate(_ sender: Any) {
+        self.player.nickname = nickname.text!
+        var createLobby: CreateLobbyRequest
+        if ((password?.text) != nil) {
+            createLobby = CreateLobbyRequest(
+                    nickname: nickname.text!,
+                    lobbyName: lobbyName.text!,
+                    password: password.text
+            )
+        } else {
+            createLobby = CreateLobbyRequest(
+                    nickname: nickname.text!,
+                    lobbyName: lobbyName.text!
+            )
+        }
         try? connectionManager?.createLobby(
-                body: CreateLobbyRequest(
-                        nickname: nickname.text!,
-                        lobbyName: lobbyName.text!,
-                        password: password.text?.count == 0 ? nil : password.text
-                )
+                body: createLobby
         )
     }
 
@@ -35,13 +47,23 @@ class CreateLobbyViewController: UIViewController {
         if segue.identifier == "joinFromCreate" {
             let dest = segue.destination as! LobbyViewController
             dest.connectionManager = self.connectionManager
+            dest.player = self.player
+            dest.lobbyId = self.lobbyId
         }
     }
-
 }
 
 extension CreateLobbyViewController: ListenOnResponse {
     func hasReceived<T, S>(res: T, req: S) {
-        performSegue(withIdentifier: "joinFromCreate", sender: nil)
+        if type(of: res) == CreateLobbyResponse.self {
+            if let resp = res as? CreateLobbyResponse {
+                self.lobbyId = resp.lobbyId
+                self.player.playerId = resp.playerId
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "joinFromCreate", sender: nil)
+                }
+            }
+        }
+
     }
 }

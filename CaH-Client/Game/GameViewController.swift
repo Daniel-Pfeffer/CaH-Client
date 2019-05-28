@@ -12,6 +12,7 @@ class GameViewController: UIViewController {
     var model = DataDistributor()
     var connectionManager: ConnectionManager? = nil
     var lobbyId: Int? = nil
+    var player: Player? = nil
 
     @IBOutlet weak var labelToCheckCards: UILabel!
 
