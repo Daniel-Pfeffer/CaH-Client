@@ -15,9 +15,19 @@ class GameViewController: UIViewController {
     var player: Player? = nil
 
     @IBOutlet weak var labelToCheckCards: UILabel!
-
+    
+    @IBOutlet weak var blackCardLabel: UILabel!
+    @IBOutlet weak var whiteCardsTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let dataSource = WhiteCardsDataSource()
+        /*
+        TODO: Fill with white cards
+        dataSource.whiteCards =
+        */
+        whiteCardsTable.dataSource = dataSource
+        whiteCardsTable.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {

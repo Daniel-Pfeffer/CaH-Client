@@ -7,22 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		28D2807658119CFD2B8D47A3 /* Pods_CaH_ClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C73C2BF33FF1E9D0D68455 /* Pods_CaH_ClientTests.framework */; };
 		2D18078B2293DFB5006A384C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D18078A2293DFB5006A384C /* GameViewController.swift */; };
+		2D74E3039DA8608C34FF94E9 /* Pods_CaH_ClientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685025DE698F663C195BCAF8 /* Pods_CaH_ClientUITests.framework */; };
 		2D855D31228D610900012BF7 /* CreateLobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D855D30228D610900012BF7 /* CreateLobbyViewController.swift */; };
-		5C7C386CC342E52781AD38C6 /* Pods_CaH_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A17A76773E4481E6556E35 /* Pods_CaH_Client.framework */; };
 		6C68803387DB2487D9D669EE /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C688107BB8072A0AA4656A2 /* ConnectionManager.swift */; };
 		6C6883B241399DDF8961A381 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C688B6EBC15FE2ED12A439B /* LaunchScreen.storyboard */; };
 		6C6884F13171DF50053E2296 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C688ACD3B3E940C3DF5F4D1 /* AppDelegate.swift */; };
 		6C6885863BD3F6F34F8D0AE6 /* Datastructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C688D11804EDF047BF6851B /* Datastructures.swift */; };
 		6C6888CBBE25FAEC3A29A5DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C68857E72C9AF83EFF7E705 /* Assets.xcassets */; };
-		E868FAD8B3E9EB4E757B9B1B /* Pods_CaH_ClientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B99F08173F88BAAAC0CE82 /* Pods_CaH_ClientUITests.framework */; };
+		BB8D898647E9233E19BA9FF5 /* Pods_CaH_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B858CB795E86C7255025B54 /* Pods_CaH_Client.framework */; };
+		E314859F49703D0006290850 /* Pods_CaH_ClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA842AC3002584169AAB24B /* Pods_CaH_ClientTests.framework */; };
 		FA1999E4228AABA0001D62E0 /* LobbiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1999E3228AABA0001D62E0 /* LobbiesTableViewController.swift */; };
 		FA1999E6228AABC6001D62E0 /* LobbiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1999E5228AABC6001D62E0 /* LobbiesTableViewCell.swift */; };
 		FA1999EA228AABE3001D62E0 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1999E8228AABE2001D62E0 /* PlayerTableViewCell.swift */; };
 		FA1999EB228AABE3001D62E0 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1999E9228AABE3001D62E0 /* LobbyViewController.swift */; };
 		FA1999ED228AAC30001D62E0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1999EC228AAC30001D62E0 /* Model.swift */; };
 		FA1999EF228AAC5F001D62E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1999EE228AAC5F001D62E0 /* Main.storyboard */; };
+		FA2616E422B3CD1F00CD0537 /* WhiteCardsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2616E322B3CD1F00CD0537 /* WhiteCardsDataSource.swift */; };
+		FA264E9022A6A03200DB57EB /* black_card.PNG in Resources */ = {isa = PBXBuildFile; fileRef = FA264E8F22A6A03200DB57EB /* black_card.PNG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,10 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00C73C2BF33FF1E9D0D68455 /* Pods_CaH_ClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaH_ClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B858CB795E86C7255025B54 /* Pods_CaH_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaH_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D18078A2293DFB5006A384C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		2D855D30228D610900012BF7 /* CreateLobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLobbyViewController.swift; sourceTree = "<group>"; };
-		62534B08C4F9046AA3870C06 /* Pods-CaH-ClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-ClientTests.release.xcconfig"; path = "Target Support Files/Pods-CaH-ClientTests/Pods-CaH-ClientTests.release.xcconfig"; sourceTree = "<group>"; };
+		3CD678A0791012422D77B7C8 /* Pods-CaH-Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-Client.release.xcconfig"; path = "Target Support Files/Pods-CaH-Client/Pods-CaH-Client.release.xcconfig"; sourceTree = "<group>"; };
+		685025DE698F663C195BCAF8 /* Pods_CaH_ClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaH_ClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C688107BB8072A0AA4656A2 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		6C68823A79526A2EA1724557 /* CaH-Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CaH-Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C688432EBDC8F540B907DBB /* CaH-ClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CaH-ClientTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,19 +59,20 @@
 		6C688ACD3B3E940C3DF5F4D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C688D11804EDF047BF6851B /* Datastructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datastructures.swift; sourceTree = "<group>"; };
 		6C688E03B4ACA0C910FB8B8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		929DD65BC2210F8B475827F1 /* Pods-CaH-ClientUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-ClientUITests.release.xcconfig"; path = "Target Support Files/Pods-CaH-ClientUITests/Pods-CaH-ClientUITests.release.xcconfig"; sourceTree = "<group>"; };
-		97B99F08173F88BAAAC0CE82 /* Pods_CaH_ClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaH_ClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A65217EC017140C2E835610C /* Pods-CaH-Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-Client.debug.xcconfig"; path = "Target Support Files/Pods-CaH-Client/Pods-CaH-Client.debug.xcconfig"; sourceTree = "<group>"; };
-		BDCDC6CAA6517C023A0EEF9F /* Pods-CaH-Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-Client.release.xcconfig"; path = "Target Support Files/Pods-CaH-Client/Pods-CaH-Client.release.xcconfig"; sourceTree = "<group>"; };
-		CFA37BB6A19E130BCA979BF1 /* Pods-CaH-ClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-ClientTests.debug.xcconfig"; path = "Target Support Files/Pods-CaH-ClientTests/Pods-CaH-ClientTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F0A17A76773E4481E6556E35 /* Pods_CaH_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaH_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EB6F3E8415BAEF8435F8630 /* Pods-CaH-ClientUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-ClientUITests.debug.xcconfig"; path = "Target Support Files/Pods-CaH-ClientUITests/Pods-CaH-ClientUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7DA4E3736FBF72F59A41F9A4 /* Pods-CaH-Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-Client.debug.xcconfig"; path = "Target Support Files/Pods-CaH-Client/Pods-CaH-Client.debug.xcconfig"; sourceTree = "<group>"; };
+		92A9955F34DB52F0B0734BFC /* Pods-CaH-ClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-ClientTests.debug.xcconfig"; path = "Target Support Files/Pods-CaH-ClientTests/Pods-CaH-ClientTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B7479F8E36C52864D6663BAB /* Pods-CaH-ClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-ClientTests.release.xcconfig"; path = "Target Support Files/Pods-CaH-ClientTests/Pods-CaH-ClientTests.release.xcconfig"; sourceTree = "<group>"; };
+		BF0859B222D0E46749BB789F /* Pods-CaH-ClientUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-ClientUITests.release.xcconfig"; path = "Target Support Files/Pods-CaH-ClientUITests/Pods-CaH-ClientUITests.release.xcconfig"; sourceTree = "<group>"; };
+		EBA842AC3002584169AAB24B /* Pods_CaH_ClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaH_ClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1999E3228AABA0001D62E0 /* LobbiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LobbiesTableViewController.swift; sourceTree = "<group>"; };
 		FA1999E5228AABC6001D62E0 /* LobbiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LobbiesTableViewCell.swift; sourceTree = "<group>"; };
 		FA1999E8228AABE2001D62E0 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		FA1999E9228AABE3001D62E0 /* LobbyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		FA1999EC228AAC30001D62E0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FA1999EE228AAC5F001D62E0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		FC7B0596221136E31161DDFE /* Pods-CaH-ClientUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaH-ClientUITests.debug.xcconfig"; path = "Target Support Files/Pods-CaH-ClientUITests/Pods-CaH-ClientUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA2616E322B3CD1F00CD0537 /* WhiteCardsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteCardsDataSource.swift; sourceTree = "<group>"; };
+		FA264E8F22A6A03200DB57EB /* black_card.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_card.PNG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28D2807658119CFD2B8D47A3 /* Pods_CaH_ClientTests.framework in Frameworks */,
+				E314859F49703D0006290850 /* Pods_CaH_ClientTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E868FAD8B3E9EB4E757B9B1B /* Pods_CaH_ClientUITests.framework in Frameworks */,
+				2D74E3039DA8608C34FF94E9 /* Pods_CaH_ClientUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C7C386CC342E52781AD38C6 /* Pods_CaH_Client.framework in Frameworks */,
+				BB8D898647E9233E19BA9FF5 /* Pods_CaH_Client.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				2D18078A2293DFB5006A384C /* GameViewController.swift */,
+				FA2616E322B3CD1F00CD0537 /* WhiteCardsDataSource.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -117,9 +122,9 @@
 		5047D678E91B777B69A1A5A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F0A17A76773E4481E6556E35 /* Pods_CaH_Client.framework */,
-				00C73C2BF33FF1E9D0D68455 /* Pods_CaH_ClientTests.framework */,
-				97B99F08173F88BAAAC0CE82 /* Pods_CaH_ClientUITests.framework */,
+				2B858CB795E86C7255025B54 /* Pods_CaH_Client.framework */,
+				EBA842AC3002584169AAB24B /* Pods_CaH_ClientTests.framework */,
+				685025DE698F663C195BCAF8 /* Pods_CaH_ClientUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,14 +132,13 @@
 		585D1C9B02210DFFA68C5AC3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A65217EC017140C2E835610C /* Pods-CaH-Client.debug.xcconfig */,
-				BDCDC6CAA6517C023A0EEF9F /* Pods-CaH-Client.release.xcconfig */,
-				CFA37BB6A19E130BCA979BF1 /* Pods-CaH-ClientTests.debug.xcconfig */,
-				62534B08C4F9046AA3870C06 /* Pods-CaH-ClientTests.release.xcconfig */,
-				FC7B0596221136E31161DDFE /* Pods-CaH-ClientUITests.debug.xcconfig */,
-				929DD65BC2210F8B475827F1 /* Pods-CaH-ClientUITests.release.xcconfig */,
+				7DA4E3736FBF72F59A41F9A4 /* Pods-CaH-Client.debug.xcconfig */,
+				3CD678A0791012422D77B7C8 /* Pods-CaH-Client.release.xcconfig */,
+				92A9955F34DB52F0B0734BFC /* Pods-CaH-ClientTests.debug.xcconfig */,
+				B7479F8E36C52864D6663BAB /* Pods-CaH-ClientTests.release.xcconfig */,
+				6EB6F3E8415BAEF8435F8630 /* Pods-CaH-ClientUITests.debug.xcconfig */,
+				BF0859B222D0E46749BB789F /* Pods-CaH-ClientUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -171,9 +175,9 @@
 		6C6889B734D4A65F61AC3AA3 /* CaH-Client */ = {
 			isa = PBXGroup;
 			children = (
+				FA264E8A22A69EA400DB57EB /* assets */,
 				2D1807892293DF7B006A384C /* Chat */,
 				2D1807882293DF62006A384C /* Game */,
-				2D855D30228D610900012BF7 /* CreateLobbyViewController.swift */,
 				FA1999E7228AABCD001D62E0 /* Lobby */,
 				FA1999E2228AAB67001D62E0 /* Lobbies */,
 				6C68842E6C11408ABC7CD2D2 /* Model */,
@@ -181,6 +185,7 @@
 				6C68857E72C9AF83EFF7E705 /* Assets.xcassets */,
 				6C688B6EBC15FE2ED12A439B /* LaunchScreen.storyboard */,
 				FA1999EE228AAC5F001D62E0 /* Main.storyboard */,
+				2D855D30228D610900012BF7 /* CreateLobbyViewController.swift */,
 				6C688ACD3B3E940C3DF5F4D1 /* AppDelegate.swift */,
 			);
 			path = "CaH-Client";
@@ -202,6 +207,14 @@
 				FA1999E8228AABE2001D62E0 /* PlayerTableViewCell.swift */,
 			);
 			path = Lobby;
+			sourceTree = "<group>";
+		};
+		FA264E8A22A69EA400DB57EB /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				FA264E8F22A6A03200DB57EB /* black_card.PNG */,
+			);
+			path = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,11 +284,6 @@
 			isa = PBXProject;
 			attributes = {
 				ORGANIZATIONNAME = "at.htl-leonding";
-				TargetAttributes = {
-					6C6886BF42D35B1D352605AA = {
-						DevelopmentTeam = BMARK28GQ6;
-					};
-				};
 			};
 			buildConfigurationList = 6C6888503A95EFF66D5586C8 /* Build configuration list for PBXProject "CaH-Client" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -320,6 +328,7 @@
 				FA1999EF228AAC5F001D62E0 /* Main.storyboard in Resources */,
 				6C6888CBBE25FAEC3A29A5DC /* Assets.xcassets in Resources */,
 				6C6883B241399DDF8961A381 /* LaunchScreen.storyboard in Resources */,
+				FA264E9022A6A03200DB57EB /* black_card.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +443,7 @@
 				FA1999E6228AABC6001D62E0 /* LobbiesTableViewCell.swift in Sources */,
 				FA1999E4228AABA0001D62E0 /* LobbiesTableViewController.swift in Sources */,
 				2D855D31228D610900012BF7 /* CreateLobbyViewController.swift in Sources */,
+				FA2616E422B3CD1F00CD0537 /* WhiteCardsDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,7 +483,7 @@
 /* Begin XCBuildConfiguration section */
 		6C68803EB03353228C975561 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 929DD65BC2210F8B475827F1 /* Pods-CaH-ClientUITests.release.xcconfig */;
+			baseConfigurationReference = BF0859B222D0E46749BB789F /* Pods-CaH-ClientUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "CaH-ClientUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -487,7 +497,7 @@
 		};
 		6C68825BF3D2EC1479B6D96E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62534B08C4F9046AA3870C06 /* Pods-CaH-ClientTests.release.xcconfig */;
+			baseConfigurationReference = B7479F8E36C52864D6663BAB /* Pods-CaH-ClientTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CaH-Client.app/CaH-Client";
 				INFOPLIST_FILE = "CaH-ClientTests/Info.plist";
@@ -502,7 +512,7 @@
 		};
 		6C6887393FB27E3367F5BB79 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC7B0596221136E31161DDFE /* Pods-CaH-ClientUITests.debug.xcconfig */;
+			baseConfigurationReference = 6EB6F3E8415BAEF8435F8630 /* Pods-CaH-ClientUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "CaH-ClientUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -570,10 +580,10 @@
 		};
 		6C6888739350D36E0FC46E3F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDCDC6CAA6517C023A0EEF9F /* Pods-CaH-Client.release.xcconfig */;
+			baseConfigurationReference = 3CD678A0791012422D77B7C8 /* Pods-CaH-Client.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BMARK28GQ6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "CaH-Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "at.htl-leonding.CaH-Client";
@@ -585,7 +595,7 @@
 		};
 		6C6889A119887C9DC10FC30A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFA37BB6A19E130BCA979BF1 /* Pods-CaH-ClientTests.debug.xcconfig */;
+			baseConfigurationReference = 92A9955F34DB52F0B0734BFC /* Pods-CaH-ClientTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CaH-Client.app/CaH-Client";
 				INFOPLIST_FILE = "CaH-ClientTests/Info.plist";
@@ -600,10 +610,10 @@
 		};
 		6C688DAD9B282B8002164BD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A65217EC017140C2E835610C /* Pods-CaH-Client.debug.xcconfig */;
+			baseConfigurationReference = 7DA4E3736FBF72F59A41F9A4 /* Pods-CaH-Client.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = BMARK28GQ6;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "CaH-Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "at.htl-leonding.CaH-Client";
