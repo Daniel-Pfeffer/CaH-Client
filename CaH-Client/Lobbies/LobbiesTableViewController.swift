@@ -12,7 +12,7 @@ class LobbiesTableViewController: UITableViewController {
 
     var model = DataDistributor()
 
-    let socket: ConnectionManager = ConnectionManager(path: "http://192.168.2.1:8080/")
+    let socket: ConnectionManager = ConnectionManager(path: "http://192.168.19.1:8080/")
 
     var player: Player = Player()
 
